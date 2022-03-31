@@ -1,21 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import Spinner from '../Spinner/Spinner'
 
 const CoinDetails = () => {
     const {id} = useParams()
     const [coin,setCoin] = useState({})
+    const [loading,setLoading] = useState(false)
+
 
     useEffect(()=>{
+        setLoading(true)
         const url = `https://api.coingecko.com/api/v3/coins/${id}`
         fetch(url)
         .then (res=>res.json())
         .then(data =>{
             setCoin(data)
+            setLoading(false)
             console.log(data)
         } )
     },[id])
     return (
-        <div className=' px-4 h-[80vh] pt-20 pb-24 mx-auto max-w-7xl md:px-2'>
+        <>
+        {
+            loading ? <Spinner></Spinner> : <div className=' px-4 h-[80vh] pt-20 pb-24 mx-auto max-w-7xl md:px-2'>
             <div className=' h-full grid grid-cols-1 md:grid-cols-2 justify-items-center gap-4 md:justify-around'>
                 <div className='order-2 md:order-1'> 
                 <h1 className='text-3xl'>General Info:</h1>
@@ -39,6 +46,8 @@ const CoinDetails = () => {
                 </div>
             </div>
         </div>
+        }
+        </>
     );
 };
 
