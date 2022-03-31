@@ -1,7 +1,10 @@
 import React from 'react'
 import { Route, Routes } from "react-router-dom"
+import About from './components/About/About'
+import CoinDetails from './components/CoinDetails/CoinDetails'
 import Coins from './components/Coins/Coins'
 import Contact from './components/Contact/Contact'
+import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
 import Homepage from './components/Homepage/Homepage'
 
@@ -12,9 +15,11 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Homepage></Homepage>}/>
         <Route path='/coins' element={<Coins></Coins>}/>
+        <Route path='/coin-details/:id' element={<CoinDetails></CoinDetails>}/>
         <Route path='/contact' element={<Contact></Contact>}/>
-        
+        <Route path='/about' element={<About></About>}/>
       </Routes>
+      <Footer></Footer>
     </div>
   )
 }
